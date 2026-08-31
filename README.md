@@ -1,13 +1,11 @@
-# DEW — David's Erlang Workshop
+# DEW (David's Erlang Workshop)
 
-Welcome to the workshop.
+Welcome to the workshop!
 
-Dew is a collection of dependency-free utilities for Erlang and the BEAM.
-The name reflects the idea behind the project: a workshop where useful tools are built,
-experimented with, and eventually polished enough to share.
-
-Not every tool needs to be revolutionary, sometimes you just need the thing that should have been in
-the toolbox already.
+DEW is a collection of dependency-free utilities for Erlang and the BEAM, built in the spirit of a
+small workshop where the tools are useful, easy to reach for, and the sort of thing you expect to find
+in a toolbox you keep coming back to. Think of DEW as a small library of focused utilities shaped by
+real use and by the philosophy that the best tools are the ones that just make sense to keep around.
 
 ## Compatibility
 

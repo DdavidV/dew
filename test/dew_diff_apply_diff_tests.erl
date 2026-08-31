@@ -53,6 +53,26 @@ roundtrip_map_diff_test() ->
   Diff = dew_diff:diff(Old, New),
   ?assertEqual(New, dew_diff:apply_diff(Old, Diff)).
 
+pretty_print_mixed_operations_test() ->
+  Diff = [
+    #{operation => replace,
+      path => [#{type => map, key => user}, #{type => map, key => name}],
+      value => <<"David">>,
+      old_value => <<"Dave">>},
+    #{operation => add,
+      path => [#{type => map, key => user}, #{type => map, key => id}],
+      value => 21},
+    #{operation => remove,
+      path => [#{type => map, key => user}, #{type => map, key => email}],
+      value => <<"old@example.com">>}
+  ],
+  ?assertEqual(
+    "~ user.name\n  <<\"Dave\">>\n  <<\"David\">>\n\n"
+    "+ user.id\n  21\n\n"
+    "- user.email\n  <<\"old@example.com\">>\n",
+    dew_diff:pretty_print(Diff)
+  ).
+
 reverse_list_diff_test() ->
   Old = [a, b, c, d],
   New = [a, x, c, y],

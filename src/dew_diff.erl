@@ -57,7 +57,8 @@
   diff/2,
   diff/3,
   apply_diff/2,
-  apply_diff/3
+  apply_diff/3,
+  pretty_print/1
 ]).
 
 %% Diff constructors
@@ -182,6 +183,35 @@ apply_diff_entry(Acc, #{operation := replace, path := Path} = Op, true) ->
   apply_path(Acc, Path, replace, OldValue);
 apply_diff_entry(Acc, #{operation := Operation, path := Path, value := Value}, _Reverse) ->
   apply_path(Acc, Path, Operation, Value).
+
+-spec pretty_print(Diff) -> Result when
+  Diff :: [diff()],
+  Result :: iolist().
+pretty_print(Diff) ->
+  Blocks = [pretty_print_entry(Entry) || Entry <- Diff],
+  lists:flatten(lists:join("\n\n", Blocks) ++ "\n").
+
+pretty_print_entry(#{operation := replace, path := Path, value := NewValue, old_value := OldValue}) ->
+  io_lib:format("~~ ~s\n  ~s\n  ~s", [format_path(Path), pretty_value(OldValue), pretty_value(NewValue)]);
+pretty_print_entry(#{operation := add, path := Path, value := Value}) ->
+  io_lib:format("+ ~s\n  ~s", [format_path(Path), pretty_value(Value)]);
+pretty_print_entry(#{operation := remove, path := Path, value := Value}) ->
+  io_lib:format("- ~s\n  ~s", [format_path(Path), pretty_value(Value)]);
+pretty_print_entry(_) ->
+  "".
+
+format_path([]) ->
+  "";
+format_path(Path) ->
+  lists:join(".", [format_path_step(Step) || Step <- Path]).
+
+format_path_step(#{type := map, key := Key}) ->
+  atom_to_list(Key);
+format_path_step(#{type := list, index := Index}) ->
+  integer_to_list(Index).
+
+pretty_value(Value) ->
+  lists:flatten(io_lib:format("~p", [Value])).
 
 apply_path(_Term, [], replace, Value) ->
   Value;
