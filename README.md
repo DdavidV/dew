@@ -9,10 +9,20 @@ experimented with, and eventually polished enough to share.
 Not every tool needs to be revolutionary, sometimes you just need the thing that should have been in
 the toolbox already.
 
-Build
------
+## Compatibility
 
-    $ rebar3 compile
+This project targets Erlang/OTP 21 and newer.
+
+## Module overview
+
+- `dew_diff` computes a structural diff between two Erlang terms and can apply that diff back to the
+original value.
+
+## Build
+
+```bash
+rebar3 compile
+```
 
 # License
 [MIT](LICENSE)
