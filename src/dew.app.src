@@ -4,11 +4,15 @@
   {registered, []},
   {applications, [
     kernel,
-    stdlib
+    stdlib,
+    syntax_tools
   ]},
   {env, []},
   {modules, [
-    dew_diff
+    dew_diff,
+    dew_sys,
+    dew_pipe,
+    dew_app
   ]},
   {licenses, ["MIT"]},
   {links, []}

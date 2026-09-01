@@ -15,11 +15,22 @@ This project targets Erlang/OTP 21 and newer.
 
 - `dew_diff` computes a structural diff between two Erlang terms and can apply that diff back to the
 original value.
+- `dew_app` provides OTP application introspection utilities.
+- `dew_pipe` is an Elixir-like pipe operator implementation for Erlang using parse transforms,
+enabling fluent function chaining.
+- `dew_sys` is a utility module for inspecting the running Erlang VM, useful for
+debugging and system monitoring.
 
 ## Build
 
 ```bash
 rebar3 compile
+```
+
+## Test
+
+```bash
+rebar3 test
 ```
 
 # License
