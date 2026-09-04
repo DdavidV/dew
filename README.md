@@ -20,6 +20,7 @@ original value.
 enabling fluent function chaining.
 - `dew_sys` is a utility module for inspecting the running Erlang VM, useful for
 debugging and system monitoring.
+- `dew_retry` runs functions with configurable retry limits, backoff strategies, and jitter.
 
 ## Build
 
