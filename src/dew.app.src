@@ -12,7 +12,11 @@
     dew_diff,
     dew_sys,
     dew_pipe,
-    dew_app
+    dew_app,
+    dew_pid,
+    dew_retry,
+    dew_pmap,
+    dew_tpl
   ]},
   {licenses, ["MIT"]},
   {links, []}

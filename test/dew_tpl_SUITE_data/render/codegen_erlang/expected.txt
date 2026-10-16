@@ -1,0 +1,22 @@
+-module(user_record).
+
+-export([
+  id/1,
+  name/1,
+  admin/1
+]).
+
+-record(user, {
+  id :: integer(),
+  name = <<>> :: binary(),
+  admin = false :: boolean()
+}).
+
+id(#user{ id = Value }) ->
+  Value.
+
+name(#user{ name = Value }) ->
+  Value.
+
+admin(#user{ admin = Value }) ->
+  Value.

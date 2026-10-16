@@ -1,0 +1,12 @@
+{data, #{
+  title => <<"Weekly Report"/utf8>>,
+  sections => [
+    #{name => <<"Árvíztűrő services"/utf8>>, rows => [
+      #{label => <<"api-gateway-primary">>, status => ok, value => 99.9},
+      #{label => <<"db">>, status => <<"warn">>, value => 97},
+      #{label => <<"cache">>, status => down, value => 0}
+    ]},
+    #{name => <<"Batch jobs">>, rows => []}
+  ],
+  tags => [infra, <<"weekly">>, "report"]
+}}.

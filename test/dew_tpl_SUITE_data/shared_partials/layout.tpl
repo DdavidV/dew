@@ -1,0 +1,1 @@
+<html><title>{{ title }}</title><body>{{ include "nav" }}</body></html>

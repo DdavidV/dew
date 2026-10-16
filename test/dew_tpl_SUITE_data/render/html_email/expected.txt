@@ -1,0 +1,23 @@
+<h1>CORNER &amp; CO</h1>
+<p>Hi Ann &lt;admin&gt;,</p>
+<p>You have 3 orders:</p>
+<table>
+  <tr class="first">
+    <td>1</td>
+    <td>Pen</td>
+    <td>1.99 EUR</td>
+  </tr>
+  <tr class="middle">
+    <td>2</td>
+    <td>Ink &lt;black&gt;</td>
+    <td>12.50 EUR</td>
+  </tr>
+  <tr class="last">
+    <td>3</td>
+    <td>Paper</td>
+    <td>0.05 EUR</td>
+  </tr>
+</table>
+<div class="note"><b>Thanks!</b></div>
+<p>&quot;quoted&quot; &amp; &#39;single&#39;</p>
+<footer>&copy; Corner &amp; Co</footer>

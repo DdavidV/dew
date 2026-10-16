@@ -1,0 +1,7 @@
+start
+  shown
+  - 1
+  - 2
+inline yes stays
+nested standalone
+end

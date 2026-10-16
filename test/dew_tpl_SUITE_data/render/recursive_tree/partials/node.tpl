@@ -1,0 +1,1 @@
+{{ name }}{{ if children }}({{ for c in children }}{{ include "node" c }}{{ if not loop.last }} {{ end }}{{ end }}){{ end }}

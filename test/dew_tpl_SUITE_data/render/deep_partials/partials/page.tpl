@@ -1,0 +1,1 @@
+<page>{{ include "section" content }}</page>

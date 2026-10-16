@@ -1,0 +1,14 @@
+# Weekly Report
+
+## 1. Árvíztűrő services
+
+- api-gateway-: ✅ (99.9)
+- db: ⚠️ (97)
+- cache: ❌ (0)
+
+## 2. Batch jobs
+
+_No data._
+
+Total sections: 2
+Tags: infra · weekly · report

@@ -1,0 +1,10 @@
+{data, #{
+  env => prod,
+  server => #{port => 8080, host => <<"0.0.0.0">>, workers => 4, keepalive => true},
+  upstreams => [
+    #{name => <<"app1.local">>, port => 9000},
+    #{name => <<"app2.local">>},
+    #{name => <<"spare.local">>, port => 9001, backup => true}
+  ],
+  features => [gzip, http2, <<"tls">>]
+}}.

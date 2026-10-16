@@ -1,0 +1,2 @@
+Ann <ann@example.com> [A]
+Bob <bob@example.com> [U]

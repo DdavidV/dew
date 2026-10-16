@@ -1,0 +1,1 @@
+<nav>{{ for link in links }}<a href="{{ link.href }}">{{ link.text }}</a>{{ end }}</nav>

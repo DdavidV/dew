@@ -1,0 +1,1 @@
+{data, [{title, <<"Stock">>}, {items, [[{name, apple}, {qty, 3}], [{name, pear}, {qty, 0}]]}]}.

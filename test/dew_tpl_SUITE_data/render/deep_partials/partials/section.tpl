@@ -1,0 +1,1 @@
+<section>{{ for item in items }}{{ include "item" item }}{{ end }}</section>

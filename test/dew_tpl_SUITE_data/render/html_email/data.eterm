@@ -1,0 +1,12 @@
+{data, #{
+  shop => <<"Corner & Co">>,
+  currency => <<"EUR">>,
+  customer => #{name => <<"Ann <admin>">>, comment => <<"\"quoted\" & 'single'">>},
+  orders => [
+    #{item => <<"Pen">>, cents => 199},
+    #{item => <<"Ink <black>">>, cents => 1250},
+    #{item => <<"Paper">>, cents => 5}
+  ],
+  note_html => <<"<b>Thanks!</b>">>
+}}.
+{options, #{escape_fun => html}}.

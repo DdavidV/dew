@@ -1,0 +1,5 @@
+{data, #{tree => #{name => root, children => [
+  #{name => a, children => [#{name => a1, children => []}, #{name => a2, children => []}]},
+  #{name => b, children => []},
+  #{name => c, children => [#{name => c1, children => [#{name => c11, children => []}]}]}
+]}}}.

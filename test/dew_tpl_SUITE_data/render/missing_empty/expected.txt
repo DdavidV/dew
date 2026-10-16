@@ -1,0 +1,4 @@
+name=[]
+nick=[anon]
+not admin
+no posts

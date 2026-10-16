@@ -1,0 +1,5 @@
+{data, #{<<"users">> => [
+  #{<<"name">> => <<"Ann">>, <<"e-mail">> => <<"ann@example.com">>, <<"role">> => <<"admin">>},
+  #{<<"name">> => <<"Bob">>, <<"e-mail">> => <<"bob@example.com">>, <<"role">> => <<"user">>}
+]}}.
+{options, #{keys => binary}}.

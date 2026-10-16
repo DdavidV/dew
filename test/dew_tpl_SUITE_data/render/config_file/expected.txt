@@ -1,0 +1,14 @@
+# generated for prod
+log_level = warning
+
+[server]
+host = 0.0.0.0
+keepalive = true
+port = 8080
+workers = 4
+
+[upstreams]
+upstream_0 = app1.local:9000
+upstream_1 = app2.local:80
+upstream_2 = spare.local:9001 backup
+features = gzip,http2,tls

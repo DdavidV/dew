@@ -1,0 +1,1 @@
+#{phase => render, reason => {missing_key, <<"line.product.name">>}, line => 3, column => 4}.

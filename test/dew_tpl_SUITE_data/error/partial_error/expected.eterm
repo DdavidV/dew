@@ -1,0 +1,2 @@
+#{phase => render, reason => {function_crashed, <<"money">>, error, badarith}, line => 2, column => 12,
+  template => <<"inner">>, include_stack => [<<"outer">>, <<"inner">>]}.

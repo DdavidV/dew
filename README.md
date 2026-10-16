@@ -13,8 +13,6 @@ This project targets Erlang/OTP 21 and newer.
 
 ## Module overview
 
-TODO: write docs for every module in a md file
-
 - `dew_diff` computes a structural diff between two Erlang terms and can apply that diff back to the
 original value.
 - `dew_app` provides OTP application introspection utilities.
@@ -27,6 +25,8 @@ and folds over every process on the node.
 - `dew_retry` runs functions with configurable retry limits, backoff strategies, and jitter.
 - `dew_pmap` applies functions to lists and maps in parallel with configurable worker, crash, and
 timeout handling.
+- `dew_tpl` compiles and renders text templates with conditionals, loops, case, partials and custom
+functions, returning descriptive errors instead of raising.
 
 ## Build
 
