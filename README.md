@@ -22,6 +22,8 @@ original value.
 enabling fluent function chaining.
 - `dew_sys` is a utility module for inspecting the running Erlang VM, useful for
 debugging and system monitoring.
+- `dew_pid` resolves process references (names, `{global, _}`, `{via, _, _}`, pid strings) to pids
+and folds over every process on the node.
 - `dew_retry` runs functions with configurable retry limits, backoff strategies, and jitter.
 - `dew_pmap` applies functions to lists and maps in parallel with configurable worker, crash, and
 timeout handling.
