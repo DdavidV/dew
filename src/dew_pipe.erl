@@ -1,27 +1,5 @@
 -module(dew_pipe).
 
-%% A Elixir like pipe operator implementation for Erlang using parse transforms.
-%%
-%% This module provides pipe operators that enable fluent function chaining,  allowing you to
-%% elegantly pass values through a series of operations.
-%%
-%% To use the pipe operator, add the parse transform to your module:
-%% ```erlang
-%% -compile({parse_transform, dew_pipe}).
-%% ```
-%%
-%% Then use the pipe operator (`pipe') to chain function calls:
-%% ```
-%% Result = pipe(Value, function1(), function2(), function3()).
-%% ```
-%%
-%% The value flows through each function in sequence, with the result of
-%% each function becoming the first argument to the next.
-%%
-%% It is possible to use helper functions to perform side effects or transformations on the piped value:
-%% `tap/2' - Applies a function to a value for side effects and returns the value unchanged
-%% `then/2' - Applies a function to a value and returns the result
-
 -export([
   tap/2,
   then/2

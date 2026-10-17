@@ -1,10 +1,5 @@
 -module(dew_pid).
 
-%% Utility module for working with process identifiers.
-%%
-%% Provides functions to resolve process references to pids and to walk over every process on
-%% the node.
-
 -type pid_ref() :: pid() |
                    atom() |
                    {global, term()} |
@@ -22,11 +17,6 @@
   fold/2
 ]).
 
-%% Resolves a process reference to a pid.
-%%
-%% Accepts pids, locally registered names, `{global, Name}`, `{via, Module, Name}`, pid strings
-%% and binaries like `"<0.42.0>"` and `{X, Y, Z}` triplets as used by `c:pid/3`.
-%% Returns `undefined` if the reference can not be resolved.
 -spec to_pid(PidRef) -> Result when
   PidRef :: pid_ref(),
   Result :: pid() | undefined.
@@ -54,10 +44,6 @@ to_pid(_) ->
 only_pid(Pid) when is_pid(Pid) -> Pid;
 only_pid(_) -> undefined.
 
-%% Folds `Fun(Pid, Acc)` over every process on the node.
-%%
-%% Uses `erlang:processes_iterator/0` when available (OTP 28+), which avoids building the list of
-%% every pid, and falls back to `erlang:processes/0` otherwise.
 -spec fold(Fun, Acc) -> Result when
   Fun :: fun((pid(), Acc) -> Acc),
   Acc :: term(),

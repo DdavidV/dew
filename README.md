@@ -11,22 +11,21 @@ real use and by the philosophy that the best tools are the ones that just make s
 
 This project targets Erlang/OTP 21 and newer.
 
-## Module overview
+## Modules
 
-- `dew_diff` computes a structural diff between two Erlang terms and can apply that diff back to the
-original value.
-- `dew_app` provides OTP application introspection utilities.
-- `dew_pipe` is an Elixir-like pipe operator implementation for Erlang using parse transforms,
-enabling fluent function chaining.
-- `dew_sys` is a utility module for inspecting the running Erlang VM, useful for
-debugging and system monitoring.
-- `dew_pid` resolves process references (names, `{global, _}`, `{via, _, _}`, pid strings) to pids
-and folds over every process on the node.
-- `dew_retry` runs functions with configurable retry limits, backoff strategies, and jitter.
-- `dew_pmap` applies functions to lists and maps in parallel with configurable worker, crash, and
-timeout handling.
-- `dew_tpl` compiles and renders text templates with conditionals, loops, case, partials and custom
-functions, returning descriptive errors instead of raising.
+Every module has its own page in [`docs/`](docs/) that covers what it does, how to use it and every
+option it accepts.
+
+| Module | Description |
+| --- | --- |
+| [`dew_app`](docs/dew_app.md) | Resolves the dependencies of OTP applications as a tree or a graph. |
+| [`dew_diff`](docs/dew_diff.md) | Computes a structural diff between two Erlang terms, applies it forwards or in reverse, and pretty prints it. |
+| [`dew_pid`](docs/dew_pid.md) | Resolves process references (names, `{global, _}`, `{via, _, _}`, pid strings) to pids and folds over every process on the node. |
+| [`dew_pipe`](docs/dew_pipe.md) | Elixir-like pipe operator for Erlang, implemented as a parse transform, with `tap` and `then` helpers. |
+| [`dew_pmap`](docs/dew_pmap.md) | Applies a function to lists and maps in parallel with configurable worker count, node selection, crash and timeout handling. |
+| [`dew_retry`](docs/dew_retry.md) | Runs functions with configurable retry limits, backoff strategies and jitter. |
+| [`dew_sys`](docs/dew_sys.md) | Inspects the running Erlang VM: runtime info, metrics, atoms, processes, process state and ports. |
+| [`dew_tpl`](docs/dew_tpl.md) | Compiles and renders text templates with conditionals, loops, case, partials and custom functions, returning descriptive errors instead of raising. |
 
 ## Build
 
@@ -41,4 +40,4 @@ rebar3 test
 ```
 
 # License
-[MIT](LICENSE)
+[MIT](LICENSE.md)

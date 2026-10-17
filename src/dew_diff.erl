@@ -1,18 +1,5 @@
 -module(dew_diff).
 
-%% dew_diff compares Erlang terms and returns a compact list of structural operations describing
-%% how to move from one value to another.
-%%
-%% The list diffing logic is based on the Longest Common Subsequence (LCS) algorithm.
-%% For list inputs, a dynamic-programming matrix is built to measure how much of the old list still
-%% matches the new list. The matrix is then backtracked to reconstruct a minimal edit script made of
-%% add/remove/equal steps. Those steps are converted into the public diff entries.
-%%
-%% For maps, the implementation walks the old map entries and compares them to
-%% the new map, emitting remove operations for keys that disappeared and add
-%% operations for keys that were introduced. For non-list, non-map values, the
-%% fallback is a single replace operation at the current path.
-
 -type operation() :: add | remove | replace.
 
 -type map_path() :: #{

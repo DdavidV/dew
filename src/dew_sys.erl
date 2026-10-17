@@ -1,10 +1,5 @@
 -module(dew_sys).
 
-%% Utility module for inspecting the running Erlang VM.
-%%
-%% Provides functions to introspect and examine the state of the Erlang virtual machine,
-%% useful for debugging and system monitoring.
-
 -compile({no_auto_import, [
   processes/0,
   process_info/1,
@@ -88,17 +83,6 @@
 
 -define(DEFAULT_STATE_TIMEOUT, 5000).
 
-%% Returns all atoms currently present in the Erlang VM's atom table.
-%%
-%% The atom table is enumerated using the VM's internal atom indices. Each index is encoded as an
-%% Erlang External Term Format (ETF) value and decoded with `erlang:binary_to_term/1`.
-%%
-%% The ETF representation starts with `131`, the external term format version magic.
-%% The `75` byte identifies the atom representation used by the utility, with the atom table index
-%% encoded in the following bytes.
-%%
-%% This function is intended as a debugging and inspection utility for examining which atoms
-%% currently exist in the VM.
 -spec atoms() -> Result when
   Result :: [atom()].
 atoms() ->
@@ -107,7 +91,6 @@ atoms() ->
       erlang:binary_to_term(<<131, 75, N:24>>)
     end, lists:seq(0, erlang:system_info(atom_count) - 1)).
 
-%% Returns static information about the runtime: versions, architecture and system limits.
 -spec info() -> Result when
   Result :: info().
 info() ->
@@ -124,11 +107,6 @@ info() ->
       ets => erlang:system_info(ets_limit)
     }}.
 
-%% Returns a snapshot of the runtime statistics of the node.
-%%
-%% `uptime` is in milliseconds, `memory` contains every entry of `erlang:memory/0` in bytes.
-%% `run_queue` is the length of the normal and dirty CPU run queues, `run_queue_all` also includes
-%% the dirty IO run queue.
 -spec metrics() -> Result when
   Result :: metrics().
 metrics() ->
@@ -142,8 +120,6 @@ metrics() ->
     run_queue_all => erlang:statistics(total_run_queue_lengths_all),
     memory => maps:from_list(erlang:memory())}.
 
-%% Returns information about every alive process on the node.
-%% Processes that exit while the snapshot is taken are skipped.
 -spec processes() -> Result when
   Result :: [process_info()].
 processes() ->
@@ -156,8 +132,6 @@ processes() ->
       end
     end, []).
 
-%% Returns information about a single process, or `undefined` if it is not alive.
-%% Memory related fields are in bytes.
 -spec process_info(PidRef) -> Result when
   PidRef :: dew_pid:pid_ref(),
   Result :: process_info() | undefined.
@@ -197,15 +171,12 @@ global_names() ->
       end
     end, #{}, global:registered_names()).
 
-%% Same as `process_state(PidRef, 5000)`.
 -spec process_state(PidRef) -> Result when
   PidRef :: dew_pid:pid_ref(),
   Result :: {ok, term()} | {error, term()}.
 process_state(PidRef) ->
   process_state(PidRef, ?DEFAULT_STATE_TIMEOUT).
 
-%% Returns the internal state of a process that handles system messages, such as the `gen_*`
-%% behaviours, using `sys:get_state/2`.
 -spec process_state(PidRef, Timeout) -> Result when
   PidRef :: dew_pid:pid_ref(),
   Timeout :: timeout(),
@@ -225,8 +196,6 @@ process_state(PidRef, Timeout) ->
       end
   end.
 
-%% Returns information about every open port on the node.
-%% Ports that close while the snapshot is taken are skipped.
 -spec ports() -> Result when
   Result :: [port_info()].
 ports() ->
@@ -238,7 +207,6 @@ ports() ->
       end
     end, [], erlang:ports()).
 
-%% Returns the `erlang:port_info/1` items of a port as a map, or `undefined` if it is closed.
 -spec port_info(Port) -> Result when
   Port :: port(),
   Result :: port_info() | undefined.

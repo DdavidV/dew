@@ -1,16 +1,5 @@
 -module(dew_retry).
 
-%% A generic retry utility for Erlang functions and MFA calls.
-%%
-%% `run/2' executes a function, evaluates its result, and optionally retries it while the
-%% configured retry and elapsed-time limits allow. Retry behavior can be customized with an
-%% evaluator, logger, backoff function, and jitter function. The built-in evaluator retries
-%% `{error, _}' results and stops for every other result.
-%%
-%% Each callback receives a context map containing the current attempt, retry count, elapsed
-%% time, previous delay, and most recent result. Backoff functions calculate a delay in
-%% milliseconds, jitter functions can adjust that delay before it is passed to `timer:sleep/1'.
-
 -type context() :: #{
   start_time := integer(),
   elapsed := integer(),

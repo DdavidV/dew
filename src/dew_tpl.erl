@@ -1,69 +1,5 @@
 -module(dew_tpl).
 
-%% A small, fast text templating engine with conditionals, loops, case, partials and custom
-%% functions.
-%%
-%% Templates are compiled once into a tree of closures and can then be rendered many times.
-%% Every public function returns `{ok, Value}' or `{error, Error}', where `Error' is a map that
-%% describes what went wrong and where (`line', `column', `template'). `format_error/1' turns an
-%% error into a human readable message. Rendering never raises, not even when a user supplied
-%% function crashes.
-%%
-%% Syntax overview:
-%%
-%%   {{ user.name }}                         output a value (`items[0]', `map["some key"]')
-%%   {{ name | upper | truncate(10) }}       pipes, `x | f(y)' is the same as `f(x, y)'
-%%   {{ default(nickname, "anon") }}         function calls
-%%   {{ if a and not b }}..{{ else if count > 10 }}..{{ else }}..{{ end }}
-%%   {{ for item in items }}{{ loop.index }}{{ else }}empty{{ end }}
-%%   {{ for key, value in map }}..{{ end }}  (`for index, item in list' on lists)
-%%   {{ case role }}{{ when "dev", "ops" }}..{{ when "pm" }}..{{ else }}..{{ end }}
-%%   {{ include "footer" }} / {{ include "row" item }}
-%%   {{# comment #}}
-%%
-%% Operators: `==', `!=', `<', `<=', `>', `>=', `and', `or', `not'. `and' and `or' return one of
-%% their operands, so `{{ nickname or name }}' works. Literals: strings in double or single
-%% quotes, integers, floats, `true', `false' and `nil'.
-%%
-%% Falsy values are `false', `undefined', `nil', `null', `[]', `<<>>' and `#{}'. Equality treats
-%% atoms, binaries and charlists with the same text as equal, so `role == "admin"' matches the
-%% atom `admin'. A line that contains only a block tag (`if', `else', `end', `for', `case',
-%% `when', `include' or a comment) and whitespace is removed from the output entirely.
-%%
-%% Built-in functions: `upper/1', `lower/1', `trim/1', `length/1', `join/2', `truncate/2',
-%% `escape/1', `raw/1', `default/2' and `defined/1'. `raw/1' skips the `escape_fun' option,
-%% `default/2' and `defined/1' also handle missing keys.
-%%
-%% Options are a single map. `compile/2', `compile_file/2' and `render/3' all accept the same
-%% map, each function uses the keys it needs and validates every key it is given. Unknown keys
-%% and invalid values return `{error, #{reason := {invalid_option, Key, Value}}}'.
-%%
-%% Compile options (used when a template is compiled, also by `render/3' given a source):
-%%
-%%   name        Label for the template in errors: the `template' key of the error map and the
-%%               prefix of `format_error/1' ("page.tpl:3:5: ..."). Does not affect output.
-%%               Binary, string or atom. `compile_file/1,2' defaults it to the file path. A
-%%               compiled template keeps its name, `name' given to `render/3' is then ignored.
-%%   keys        How `user.name' looks keys up in maps and proplists: `atom' (default), `binary',
-%%               `string' or `fun((binary()) -> Key)'. Converted once at compile time. `atom'
-%%               never creates atoms, a name that is not an existing atom is a missing key.
-%%   functions   `#{Name => fun}' callable as `name(...)' or `x | name(...)'. Names are atoms or
-%%               binaries and override built-ins. Unknown names and wrong arities are compile
-%%               errors. Returning `{error, Reason}' or crashing becomes a render error.
-%%   escape_fun  `fun((binary()) -> iodata())' applied to every `{{ expr }}' output except
-%%               `raw(...)', or `none' (default). `fun dew_tpl:escape_html/1' escapes for HTML.
-%%
-%% Render options:
-%%
-%%   missing            `error' (default) returns a `missing_key' error, `empty' renders missing
-%%                      keys as nothing and treats them as falsy and empty in `if' and `for'.
-%%   partials           `#{Name => Template | Source}' for `{{ include "Name" }}'. Sources are
-%%                      compiled with the including template's compile options on each render,
-%%                      precompile them for speed. Errors inside a partial are reported with the
-%%                      partial's name and an `include_stack'.
-%%   output             `binary' (default) or `iodata'.
-%%   max_include_depth  How deep includes may nest before `include_depth_exceeded', default 32.
-
 -type keys() :: atom | binary | string | fun((binary()) -> term()).
 
 -type options() :: #{
@@ -139,7 +75,6 @@
 
 -define(THROW(Reason, Pos), throw({dew_tpl, Reason, Pos})).
 
-%% Compiles a template source.
 -spec compile(Source) -> Result when
   Source :: source(),
   Result :: {ok, template()} | {error, error()}.
@@ -156,7 +91,6 @@ compile(Source, Options) ->
     {error, Error} -> {error, Error}
   end.
 
-%% Reads and compiles a template file. The `name' option defaults to the path.
 -spec compile_file(Path) -> Result when
   Path :: file:filename_all(),
   Result :: {ok, template()} | {error, error()}.
@@ -183,7 +117,6 @@ compile_file(Path, Options) ->
       {error, Error}
   end.
 
-%% Renders a compiled template, or compiles and renders a template source.
 -spec render(Template, Data) -> Result when
   Template :: template() | source(),
   Data :: map() | list(),
@@ -228,7 +161,6 @@ render({dew_tpl, Name, Cfg, Fun}, Data, Options) ->
 render(Other, _Data, _Options) ->
   {error, make_error(render, {invalid_template, Other}, nopos, undefined)}.
 
-%% Formats an error returned by this module as a human readable message.
 -spec format_error(Error) -> Message when
   Error :: error(),
   Message :: binary().
@@ -249,7 +181,6 @@ format_error(#{reason := Reason} = Error) ->
 format_error(Other) ->
   to_binary(io_lib:format("~tP", [Other, 20]), Other).
 
-%% Escapes `&', `<', `>', `"' and `'' for HTML. Usable as the `escape_fun' option.
 -spec escape_html(Value) -> Escaped when
   Value :: binary() | string() | number() | atom(),
   Escaped :: binary().
